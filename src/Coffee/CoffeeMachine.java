@@ -1,11 +1,13 @@
 package Coffee;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 enum Ingredients {
-	WATER;
-	MILK;
-	COFFEE;
+	WATER,
+	MILK,
+	COFFEE
 }
 
 class Drink {
@@ -14,6 +16,8 @@ class Drink {
 	Drink(List<Ingredients> newIngredients) {
 
 		this._ingredients = newIngredients;
+	}
+	Drink() {
 	}
 	
 	public List<Ingredients> getIngredients() {
@@ -25,20 +29,25 @@ class Drink {
 	}
 	
 	public void addIngredients(List<Ingredients> addingIngredients) {
-		this._ingredients.add(addingIngredients);
+		this._ingredients.addAll(addingIngredients);
 	}
 }
 
 public class CoffeeMachine {
+	private boolean _turnedOn;
 	private int _waterCount;
 	private int _milkCount;
 	private int _coffeeCount;
+	private int _cleanliness;
+
 
 	
-	CoffeeMachine(int WATER, int MILK, int COFFEE) {
-		this._waterCount = WATER;
-		this._milkCount =MILK;
-		this._coffeeCount = COFFEE;
+	CoffeeMachine(int water, int milk, int coffee) {
+		this.addWater(water);
+		this.addMilk(milk);
+		this.addCoffee(coffee);
+		this._cleanliness = 100;
+		this._turnedOn = false;
 	}
 	
 	public int getWater(){
@@ -46,11 +55,13 @@ public class CoffeeMachine {
 	}
 	
 	public void addWater(int water) {
-		if (_protect(water, Ingredients.WATER)) {
-			this._waterCount += water;
-		} else
-			System.out.println("Много воды");
+		if (this._turnedOn) {
+			if (_protect(water, Ingredients.WATER)) {
+				this._waterCount += water;
+			} else
+				System.out.println("Много воды");
 		}
+	}
 
 
 	public void addCoffee(int coffee) {
@@ -69,21 +80,30 @@ public class CoffeeMachine {
 	
 	private boolean _protect(int amount, Ingredients ingredient) {
 		switch(ingredient) {
-			case Ingredients.WATER:
+			case WATER:
 				return this._waterCount + amount <= 100;
+			case COFFEE:
+				return this._coffeeCount + amount <= 100;
+			case MILK:
+				return this._milkCount + amount <= 100;
+			default: return false;
 		}
 	}
 	
 	public Drink makeEsspresso() {
-		Drink drink = new Drink(  addingIngredients/*Ingredients.coffee, Ingredients.water*/);
+		Drink drink = new Drink();
 		if (this._waterCount != 0 && this._coffeeCount != 0) {
+			List<Ingredients> ingredients = new ArrayList<Ingredients>();
+			ingredients.add(Ingredients.COFFEE);
+			ingredients.add(Ingredients.WATER);
+			drink.setIngredients(ingredients);
 			this._waterCount--;
 			this._coffeeCount--;
-		} return drink;
+			this._cleanliness -= 10;
+		}
+		return drink;
 	}
-	
-	public Drink createEsspresso() {
-	}
+
 
 }
 /*

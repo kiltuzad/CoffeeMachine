@@ -53,7 +53,35 @@ public class CoffeeMachine {
 	public int getWater(){
 		return this._waterCount;
 	}
-	
+
+
+	public int getMilk(){
+		return this._milkCount;
+	}
+
+	public int getCoffee(){
+		return this._coffeeCount;
+	}
+
+	public int getCleanliness(){
+		return this._cleanliness;
+	}
+
+	public boolean flip(boolean turnedOn){
+		this._turnedOn = turnedOn;
+		if(turnedOn =! turnedOn){
+			turnedOn = true;
+		}else turnedOn = false;
+		return turnedOn;
+	}
+
+	public void addCleanliness(){
+		if(this._turnedOn){
+			if(this._cleanliness >= 80){
+				System.out.println("Машину чистить не нужно!");
+			}else this._cleanliness += 10;
+		}
+	}
 	public void addWater(int water) {
 		if (this._turnedOn) {
 			if (_protect(water, Ingredients.WATER)) {
@@ -65,17 +93,21 @@ public class CoffeeMachine {
 
 
 	public void addCoffee(int coffee) {
-		if (_protect(coffee, Ingredients.COFFEE)){
-			this._coffeeCount += coffee;
-		}else
-			System.out.println("Много кофе");
+		if (this._turnedOn) {
+			if (_protect(coffee, Ingredients.COFFEE)) {
+				this._coffeeCount += coffee;
+			} else
+				System.out.println("Много кофе");
+		}
 	}
 
-	public void addMilk(int milk){
-		if (_protect(milk, Ingredients.MILK)){
-			this._milkCount += milk;
-		}else
-			System.out.println("Много молока");
+	public void addMilk(int milk) {
+		if (this._turnedOn) {
+			if (_protect(milk, Ingredients.MILK)) {
+				this._milkCount += milk;
+			} else
+				System.out.println("Много молока");
+		}
 	}
 	
 	private boolean _protect(int amount, Ingredients ingredient) {
@@ -89,20 +121,30 @@ public class CoffeeMachine {
 			default: return false;
 		}
 	}
+
+	public void status(){
+		System.out.println("Количество воды - " + this._waterCount);
+		System.out.println("Количество молока - " + this._milkCount);
+		System.out.println("Количество кофе - " + this._coffeeCount);
+		System.out.println("Чистота машины - " + this._cleanliness);
+	}
 	
 	public Drink makeEsspresso() {
 		Drink drink = new Drink();
-		if (this._waterCount != 0 && this._coffeeCount != 0) {
-			List<Ingredients> ingredients = new ArrayList<Ingredients>();
-			ingredients.add(Ingredients.COFFEE);
-			ingredients.add(Ingredients.WATER);
-			drink.setIngredients(ingredients);
-			this._waterCount--;
-			this._coffeeCount--;
-			this._cleanliness -= 10;
+		if (this._turnedOn) {
+			if (this._waterCount != 0 && this._coffeeCount != 0) {
+				List<Ingredients> ingredients = new ArrayList<Ingredients>();
+				ingredients.add(Ingredients.COFFEE);
+				ingredients.add(Ingredients.WATER);
+				drink.setIngredients(ingredients);
+				this._waterCount--;
+				this._coffeeCount--;
+				this._cleanliness -= 10;
+			}
 		}
 		return drink;
 	}
+
 
 
 }

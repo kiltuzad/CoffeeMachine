@@ -67,13 +67,13 @@ public class CoffeeMachine {
 		return this._cleanliness;
 	}
 
-	public boolean flip(boolean turnedOn){
-		this._turnedOn = turnedOn;
-		if(turnedOn =! turnedOn){
-			turnedOn = true;
-		}else turnedOn = false;
-		return turnedOn;
+	public void set_turnedOn(){
+		this._turnedOn =! this._turnedOn;
 	}
+	/*public boolean flip(boolean turnedOn){
+		this._turnedOn =! turnedOn;
+		return turnedOn;
+	}*/
 
 	public void addCleanliness(){
 		if(this._turnedOn){
@@ -130,21 +130,35 @@ public class CoffeeMachine {
 	}
 	
 	public Drink makeEsspresso() {
-		Drink drink = new Drink();
+		Drink drinkEss= new Drink();
 		if (this._turnedOn) {
 			if (this._waterCount != 0 && this._coffeeCount != 0) {
-				List<Ingredients> ingredients = new ArrayList<Ingredients>();
-				ingredients.add(Ingredients.COFFEE);
-				ingredients.add(Ingredients.WATER);
-				drink.setIngredients(ingredients);
+				List<Ingredients> ingredientsEss = new ArrayList<Ingredients>();
+				ingredientsEss.add(Ingredients.COFFEE);
+				ingredientsEss.add(Ingredients.WATER);
+				drinkEss.setIngredients(ingredientsEss);
 				this._waterCount--;
 				this._coffeeCount--;
 				this._cleanliness -= 10;
 			}
 		}
-		return drink;
+		return drinkEss;
 	}
 
+	public Drink makeCappuccino(){
+		Drink drinkCap = new Drink();
+		if (this._turnedOn){
+			if (this._milkCount != 0 | this._coffeeCount !=0){
+				List<Ingredients> ingredientsCap = new ArrayList<Ingredients>();
+				ingredientsCap.add(Ingredients.COFFEE);
+				ingredientsCap.add(Ingredients.MILK);
+				drinkCap.setIngredients(ingredientsCap);
+				this._coffeeCount --;
+				this._milkCount =- 2;
+			}
+		}
+		return drinkCap;
+	}
 
 
 }

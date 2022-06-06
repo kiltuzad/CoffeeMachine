@@ -3,6 +3,7 @@ package Coffee;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 enum Ingredients {
 	WATER,
@@ -70,6 +71,10 @@ public class CoffeeMachine {
 	public void set_turnedOn(){
 		this._turnedOn =! this._turnedOn;
 	}
+	public boolean get_turnedOn(){
+		return this._turnedOn;
+	}
+
 	/*public boolean flip(boolean turnedOn){
 		this._turnedOn =! turnedOn;
 		return turnedOn;
@@ -132,40 +137,131 @@ public class CoffeeMachine {
 	public Drink makeEsspresso() {
 		Drink drinkEss= new Drink();
 		if (this._turnedOn) {
-			if (this._waterCount != 0 && this._coffeeCount != 0) {
+			if (this._waterCount >= 2 && this._coffeeCount >= 2 | this._cleanliness >=10) {
 				List<Ingredients> ingredientsEss = new ArrayList<Ingredients>();
 				ingredientsEss.add(Ingredients.COFFEE);
 				ingredientsEss.add(Ingredients.WATER);
 				drinkEss.setIngredients(ingredientsEss);
 				this._waterCount--;
 				this._coffeeCount--;
-				this._cleanliness -= 10;
+				this._cleanliness =- 5;
 			}
 		}
 		return drinkEss;
 	}
 
+	public Drink makeEsspresso2(){
+		Drink drinkEss2 = new Drink();
+		if (this._turnedOn){
+			if(this._waterCount >= 3 | this._coffeeCount >=3 | this._cleanliness >=15){
+				List<Ingredients> ingredientsEss2 = new ArrayList<Ingredients>();
+				ingredientsEss2.add(Ingredients.COFFEE);
+				ingredientsEss2.add(Ingredients.WATER);
+				drinkEss2.setIngredients(ingredientsEss2);
+				this._waterCount =- 2;
+				this._coffeeCount =- 2;
+				this._cleanliness =- 10;
+			}
+		}
+		return drinkEss2;
+	}
+
+	public Drink makeEsspresso3(){
+		Drink drinkEss3 = new Drink();
+		if (this._turnedOn){
+			if(this._waterCount >= 4 | this._coffeeCount >=4 | this._cleanliness >=20){
+				List<Ingredients> ingredientsEss3 = new ArrayList<Ingredients>();
+				ingredientsEss3.add(Ingredients.COFFEE);
+				ingredientsEss3.add(Ingredients.WATER);
+				drinkEss3.setIngredients(ingredientsEss3);
+				this._waterCount =-3;
+				this._coffeeCount =-3;
+				this._cleanliness =- 15;
+			}
+		}
+		return drinkEss3;
+	}
+
 	public Drink makeCappuccino(){
 		Drink drinkCap = new Drink();
 		if (this._turnedOn){
-			if (this._milkCount != 0 | this._coffeeCount !=0){
+			if (this._milkCount >= 4 | this._coffeeCount >=2 | this._cleanliness >=10 ){
 				List<Ingredients> ingredientsCap = new ArrayList<Ingredients>();
 				ingredientsCap.add(Ingredients.COFFEE);
 				ingredientsCap.add(Ingredients.MILK);
 				drinkCap.setIngredients(ingredientsCap);
 				this._coffeeCount --;
 				this._milkCount =- 2;
+				this._cleanliness =- 5;
 			}
 		}
 		return drinkCap;
 	}
 
+	public Drink makeCappuccino2(){
+		Drink drinkCap2 = new Drink();
+		if (this._turnedOn){
+			if (this._milkCount >= 8 | this._coffeeCount >=4 | this._cleanliness >=15 ){
+				List<Ingredients> ingredientsCap2 = new ArrayList<Ingredients>();
+				ingredientsCap2.add(Ingredients.COFFEE);
+				ingredientsCap2.add(Ingredients.MILK);
+				drinkCap2.setIngredients(ingredientsCap2);
+				this._coffeeCount =- 2;
+				this._milkCount =- 4;
+				this._cleanliness =- 10;
+			}
+		}
+		return drinkCap2;
+	}
+
+	public Drink makeCappuccino3(){
+		Drink drinkCap3 = new Drink();
+		if (this._turnedOn){
+			if (this._milkCount >= 10 | this._coffeeCount >=6 | this._cleanliness >=20 ){
+				List<Ingredients> ingredientsCap3 = new ArrayList<Ingredients>();
+				ingredientsCap3.add(Ingredients.COFFEE);
+				ingredientsCap3.add(Ingredients.MILK);
+				drinkCap3.setIngredients(ingredientsCap3);
+				this._coffeeCount =- 3;
+				this._milkCount =- 6;
+				this._cleanliness =- 15;
+			}else
+				System.out.println("Проверьте состояние машины");
+		}
+		return drinkCap3;
+	}
+
+	public void recipeEsspresso(){
+		System.out.println("20 гр отборнейшего кофе");
+		System.out.println("100 мл воды с температурой 86-90 °C");
+	}
+
+	public void recipeCappuccino(){
+		System.out.println("20 гр отборнейшего кофе");
+		System.out.println("50 мл молока при температуре 60°C");
+		System.out.println("50 мл молочной пенки");
+	}
+
 
 }
-/*
-public class Main {
-	public static void main(String[] args) {
-    CoffeeMachine coffeeMachine = new CoffeeMachine(12, 12, 12);
+
+class Menu{
+	Scanner scanner = new Scanner(System.in);
+	CoffeeMachine coffeeMachine = new CoffeeMachine(0,0,0);
+	public void switch_turnedOn () {
+		System.out.println("Для включения нажмите 1");
+		if (this.coffeeMachine.get_turnedOn()) {
+			System.out.println("Машина включена");
+			int num = this.scanner.nextInt();
+			switch (num) {
+				case 1 -> coffeeMachine.addWater(1);
+			}
+		}else System.out.println("Машина выключена");
+	}
+}
+
+		/*
+		CoffeeMachine coffeeMachine = new CoffeeMachine(12, 12, 12);
 	Drink drink = new Drink;
 	switch(){
 		case 1:
@@ -173,6 +269,5 @@ public class Main {
 			break;
 		default:
 			break;
-	}
 	}
 }*/

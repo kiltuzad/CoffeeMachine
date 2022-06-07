@@ -1,0 +1,51 @@
+Index: src/Coffee/CoffeeMachine.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Coffee;\n\nimport java.util.List;\n\nenum Ingredients {\n\tWATER;\n\tMILK;\n\tCOFFEE;\n}\n\nclass Drink {\n\tprivate List<Ingredients> _ingredients;\n\t\n\tDrink(List<Ingredients> newIngredients) {\n\n\t\tthis._ingredients = newIngredients;\n\t}\n\t\n\tpublic List<Ingredients> getIngredients() {\n\t\treturn this._ingredients;\n\t}\n\t\n\tpublic void setIngredients(List<Ingredients> addingIngredients) {\n\t\tthis._ingredients = addingIngredients;\n\t}\n\t\n\tpublic void addIngredients(List<Ingredients> addingIngredients) {\n\t\tthis._ingredients.add(addingIngredients);\n\t}\n}\n\npublic class CoffeeMachine {\n\tprivate int _waterCount;\n\tprivate int _milkCount;\n\tprivate int _coffeeCount;\n\n\t\n\tCoffeeMachine(int WATER, int MILK, int COFFEE) {\n\t\tthis._waterCount = WATER;\n\t\tthis._milkCount =MILK;\n\t\tthis._coffeeCount = COFFEE;\n\t}\n\t\n\tpublic int getWater(){\n\t\treturn this._waterCount;\n\t}\n\t\n\tpublic void addWater(int water) {\n\t\tif (_protect(water, Ingredients.WATER)) {\n\t\t\tthis._waterCount += water;\n\t\t} else\n\t\t\tSystem.out.println(\"Много воды\");\n\t\t}\n\n\n\tpublic void addCoffee(int coffee) {\n\t\tif (_protect(coffee, Ingredients.COFFEE)){\n\t\t\tthis._coffeeCount += coffee;\n\t\t}else\n\t\t\tSystem.out.println(\"Много кофе\");\n\t}\n\n\tpublic void addMilk(int milk){\n\t\tif (_protect(milk, Ingredients.MILK)){\n\t\t\tthis._milkCount += milk;\n\t\t}else\n\t\t\tSystem.out.println(\"Много молока\");\n\t}\n\t\n\tprivate boolean _protect(int amount, Ingredients ingredient) {\n\t\tswitch(ingredient) {\n\t\t\tcase Ingredients.WATER:\n\t\t\t\treturn this._waterCount + amount <= 100;\n\t\t}\n\t}\n\t\n\tpublic Drink makeEsspresso() {\n\t\tDrink drink = new Drink(  addingIngredients/*Ingredients.coffee, Ingredients.water*/);\n\t\tif (this._waterCount != 0 && this._coffeeCount != 0) {\n\t\t\tthis._waterCount--;\n\t\t\tthis._coffeeCount--;\n\t\t} return drink;\n\t}\n\t\n\tpublic Drink createEsspresso() {\n\t}\n\n}\n/*\npublic class Main {\n\tpublic static void main(String[] args) {\n    CoffeeMachine coffeeMachine = new CoffeeMachine(12, 12, 12);\n\tDrink drink = new Drink;\n\tswitch(){\n\t\tcase 1:\n\t\t\tdrink.setIngredients(coffeeMachine.addWater());\n\t\t\tbreak;\n\t\tdefault:\n\t\t\tbreak;\n\t}\n\t}\n}*/
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Coffee/CoffeeMachine.java b/src/Coffee/CoffeeMachine.java
+--- a/src/Coffee/CoffeeMachine.java	(revision 4e2d47e7d8c16022c654ccb0941dce57c44262a4)
++++ b/src/Coffee/CoffeeMachine.java	(date 1653895077394)
+@@ -3,9 +3,9 @@
+ import java.util.List;
+ 
+ enum Ingredients {
+-	WATER;
+-	MILK;
+-	COFFEE;
++	WATER,
++	MILK,
++	COFFEE
+ }
+ 
+ class Drink {
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"29d7ee7d-2ce5-443e-b122-1a4e61c5c003\" name=\"Changes\" comment=\"\">\n      <change afterPath=\"$PROJECT_DIR$/.gitignore\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/.idea/misc.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/.idea/modules.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/.idea/vcs.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/Orlov_Coffee.iml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/Coffee_machine.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/Ingredients.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/test.java\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\n      <map>\n        <entry key=\"$PROJECT_DIR$\" value=\"master\" />\n      </map>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProjectId\" id=\"29hRANEN6q0drrI4s7H5GzZNf8H\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">{\n  &quot;keyToString&quot;: {\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\n    &quot;last_opened_file_path&quot;: &quot;C:/Users/UwU/Desktop/coffee&quot;,\n    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,\n    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,\n    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;\n  }\n}</component>\n  <component name=\"RunManager\">\n    <configuration name=\"Coffee_machine\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"Coffee_machine\" />\n      <module name=\"Orlov_Coffee\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"Application.Coffee_machine\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"29d7ee7d-2ce5-443e-b122-1a4e61c5c003\" name=\"Changes\" comment=\"\" />\n      <created>1653563187616</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1653563187616</updated>\n    </task>\n    <servers />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 4e2d47e7d8c16022c654ccb0941dce57c44262a4)
++++ b/.idea/workspace.xml	(date 1653895077871)
+@@ -5,15 +5,8 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="29d7ee7d-2ce5-443e-b122-1a4e61c5c003" name="Changes" comment="">
+-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/Orlov_Coffee.iml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/Coffee_machine.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/Ingredients.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/test.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Coffee/CoffeeMachine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Coffee/CoffeeMachine.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />

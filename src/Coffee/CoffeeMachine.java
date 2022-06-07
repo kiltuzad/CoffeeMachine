@@ -1,7 +1,6 @@
 package Coffee;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -42,11 +41,8 @@ public class CoffeeMachine {
 	private int _cleanliness;
 
 
-	
-	CoffeeMachine(int water, int milk, int coffee) {
-		this.addWater(water);
-		this.addMilk(milk);
-		this.addCoffee(coffee);
+
+	CoffeeMachine() {
 		this._cleanliness = 100;
 		this._turnedOn = false;
 	}
@@ -68,12 +64,22 @@ public class CoffeeMachine {
 		return this._cleanliness;
 	}
 
-	public void set_turnedOn(){
+
+	/*public boolean set_turnedOn(){
+		this._turnedOn = flip ;
+			this._turnedOn = !this._turnedOn;
+		return true;
+	}*/
+
+	public void set_turnedOn() {
 		this._turnedOn =! this._turnedOn;
 	}
+
 	public boolean get_turnedOn(){
 		return this._turnedOn;
 	}
+
+
 
 	/*public boolean flip(boolean turnedOn){
 		this._turnedOn =! turnedOn;
@@ -242,23 +248,100 @@ public class CoffeeMachine {
 		System.out.println("50 мл молочной пенки");
 	}
 
+	public void menuMachine(){
+		System.out.println("Добавить ингридидиенты - 1");
+		System.out.println("Состояние машины - 2");
+		System.out.println("Очистить машину - 3");
+		System.out.println("Приготовить Эспрессо - 4");
+		System.out.println("Приготовить Каапучино - 5");
+		System.out.println("Создать профиль - 6");
+		System.out.println("Выбрать профиль - 7");
+		System.out.println("Рецепт Эспрессо - 8");
+		System.out.println("Рецепт Капучино - 9");
+		System.out.println("Выключить машину - 0");
+	}
+
+	public void menuAddIngridient(){
+		System.out.println("Добавить воды - 1");
+		System.out.println("Добавить кофе - 2");
+		System.out.println("Добавить молоко - 3");
+		System.out.println("Вернуться в меню - 4");
+	}
+
+	public void menuEsspresso(){
+		System.out.println("Сколько кружек сделать ?");
+		System.out.println("Сдлеать одну порцию - 1");
+		System.out.println("Сдеть две порции - 2");
+		System.out.println("Сделать три порции - 3");
+		System.out.println("Вернуться в меню -4");
+	}
+
 
 }
 
-class Menu{
-	Scanner scanner = new Scanner(System.in);
-	CoffeeMachine coffeeMachine = new CoffeeMachine(0,0,0);
-	public void switch_turnedOn () {
+class Menu {
+
+	static Scanner scanner = new Scanner(System.in);
+	static CoffeeMachine coffeeMachine = new CoffeeMachine();
+
+	public static void main(String[] args) {
+
+		String on = scanner.nextLine();
 		System.out.println("Для включения нажмите 1");
-		if (this.coffeeMachine.get_turnedOn()) {
+		if (on.equals("1")) coffeeMachine.set_turnedOn();
+		{
 			System.out.println("Машина включена");
-			int num = this.scanner.nextInt();
+			coffeeMachine.menuMachine();
+			int num = scanner.nextInt();
 			switch (num) {
-				case 1 -> coffeeMachine.addWater(1);
+				case 1 -> switchAddIngridient();
+				case 2 -> coffeeMachine.status();
+				case 3 -> coffeeMachine.addCleanliness();
+				case 4 -> switchMakeEsspresso();
+				case 5 -> switchMakeCappucchino();
+				case 8 -> coffeeMachine.recipeEsspresso();
+				case 9 -> coffeeMachine.recipeCappuccino();
+
 			}
-		}else System.out.println("Машина выключена");
+		}
+		System.out.println("Машина выключена");
+	}
+
+	public static void switchAddIngridient() {
+		int num1 = scanner.nextInt();
+		coffeeMachine.menuAddIngridient();
+		switch (num1) {
+			case 1 -> coffeeMachine.addWater(1);
+			case 2 -> coffeeMachine.addCoffee(1);
+			case 3 -> coffeeMachine.addMilk(1);
+			case 4 -> ;
+		}
+	}
+
+	public static void switchMakeEsspresso() {
+		int num2 = scanner.nextInt();
+		coffeeMachine.menuEsspresso();
+		switch (num2) {
+			case 1 -> coffeeMachine.makeEsspresso();
+			case 2 -> coffeeMachine.makeEsspresso2();
+			case 3 -> coffeeMachine.makeEsspresso3();
+			case 4 -> switch_turnedOn();
+		}
+	}
+
+	public static void switchMakeCappucchino() {
+		int num3 = scanner.nextInt();
+		coffeeMachine.menuEsspresso();
+		switch (num3) {
+			case 1 -> coffeeMachine.makeCappuccino();
+			case 2 -> coffeeMachine.makeCappuccino2();
+			case 3 -> coffeeMachine.makeCappuccino3();
+			case 4 -> switch_turnedOn();
+		}
 	}
 }
+
+
 
 		/*
 		CoffeeMachine coffeeMachine = new CoffeeMachine(12, 12, 12);
